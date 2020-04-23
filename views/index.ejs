@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/head') %>
+  </head>
+
+  <body>
+    <%- include('partials/header') %>
+    <div class="container">
+      <h1 class="heading"><%= title %></h1>
+      <ul class="list-group">
+        <% articles.forEach(function(article){ %>
+        <li class="list-group-item">
+          <a href="/articles/<%= article._id %>"><%= article.title %></a>
+        </li>
+        <% }); %>
+      </ul>
+      <%- include('partials/footer') %>
+    </div>
+  </body>
+  <%- include('partials/script') %>
+</html>
