@@ -47,4 +47,37 @@ router.get('/articles/:id', async (req, res) => {
   });
 });
 
+//for edit articles🔂
+router.get('/articles/edit/:id', async (req, res) => {
+  const article = await Article.findById(req.params.id);
+  res.render('edit_article', {
+    article: article,
+  });
+});
+
+// Update Submit POST Route
+router.post('/articles/edit/:id', async (req, res) => {
+  const { title, author, body } = req.body;
+  const query = { _id: req.params.id };
+  const result = await Article.findByIdAndUpdate(
+    query,
+    { title, author, body },
+    { new: true }
+  );
+  if (result) {
+    res.redirect('/');
+    return;
+  } else {
+    console.log('something went to wrong :(');
+  }
+});
+
+router.get('/articles/delete/:id', async (req, res) => {
+  const article = await Article.findByIdAndDelete(req.params.id);
+  if (article) {
+    res.redirect('/');
+  } else {
+    console.log('something went to wrong data can not delete');
+  }
+});
 module.exports = router;

@@ -10,6 +10,14 @@
       <h1><%= article.title %></h1>
       <h5>Written by <%= article.author %></h5>
       <p><%= article.body %></p>
+      <hr />
+      <a class="btn btn-warning" href="/articles/edit/<%= article._id %>"
+        >Edit</a
+      >
+
+      <a class="btn btn-danger" href="/articles/delete/<%= article._id %>"
+        >Delete</a
+      >
 
       <%- include('partials/footer') %>
     </div>
