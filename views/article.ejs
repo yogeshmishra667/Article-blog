@@ -7,9 +7,10 @@
   <body>
     <%- include('partials/header') %>
     <div class="container">
-      <h1><%= article.title %></h1>
-      <h5>Written by <%= article.author %></h5>
-      <p><%= article.body %></p>
+      <h1 class="bodyHead"><%= article.title %></h1>
+      <h5 class="bodyAuthor">Written by <%= article.author %></h5>
+      <hr class="three" />
+      <p class="bodyText"><%= article.body %></p>
       <hr />
       <a class="btn btn-warning" href="/articles/edit/<%= article._id %>"
         >Edit</a

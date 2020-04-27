@@ -1,24 +1,27 @@
 const express = require('express');
 const Article = require('../models/article');
 const router = new express.Router();
+const validateSchema = require('../validation/joi');
 
-/*<==================== NOTES =====================>*/
-
-/*when you work at index.js (directly) you are use [app.get,post] but in this 
-file you are used septate route file so you used [Router.get,post] */
+/*<==================== YOGI.JS =====================>*/
 
 router.post('/articles/add', async (req, res) => {
-  const article = new Article();
+  const article = new Article(req.body);
   try {
-    article.title = req.body.title;
-    article.author = req.body.author;
-    article.body = req.body.body;
+    const validationResult = validateSchema.validate(req.body, {
+      abortEarly: false,
+    });
+    if (validationResult.error) {
+      return console.log('error aya re', validationResult.error);
+    }
+    console.log('added successfully');
     const result = await article.save();
     if (result) {
       res.redirect('/');
+      // req.flash('success', 'Article added successfully');
     }
   } catch (error) {
-    console.log('something went to wrong');
+    console.log('something went to wrong', error);
   }
 });
 router.get('/articles/add', async (req, res) => {
@@ -59,15 +62,24 @@ router.get('/articles/edit/:id', async (req, res) => {
 router.post('/articles/edit/:id', async (req, res) => {
   const { title, author, body } = req.body;
   const query = { _id: req.params.id };
-  const result = await Article.findByIdAndUpdate(
-    query,
-    { title, author, body },
-    { new: true }
-  );
-  if (result) {
-    res.redirect('/');
-    return;
-  } else {
+  try {
+    const result = await Article.findByIdAndUpdate(
+      query,
+      { title, author, body },
+      { new: true }
+    );
+    //validation using @hapi/joi
+    const validationResult = validateSchema.validate(req.body, {
+      abortEarly: false,
+    });
+    if (validationResult.error) {
+      return console.log('error aya re', validationResult.error);
+    }
+    if (result) {
+      console.log('edited successfully');
+      res.redirect('/');
+    }
+  } catch (err) {
     console.log('something went to wrong :(');
   }
 });

@@ -19,5 +19,35 @@ body {
   text-decoration: none;
 }
 .header {
-  color: #bb86fc;
+  color: #c9fc87 !important;
+  line-height: 1.5 !important;
+}
+
+.images {
+  height: 26px;
+  width: 35px;
+}
+.headers {
+  font-family: operator mono;
+  font-weight: bold;
+  color: #c9fc87 !important;
+  line-height: 1.5;
+}
+
+.bodyText {
+  letter-spacing: 1px !important;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.bodyAuthor {
+  float: right;
+  display: block;
+  margin-top: 30px;
+  font-size: 21px;
+}
+
+.bodyHead {
+  display: inline-block;
+  margin-bottom: 20px;
 }
