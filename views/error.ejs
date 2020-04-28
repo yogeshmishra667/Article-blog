@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('partials/head') %>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="jumbotron error">
+        <h1 class="display-4">⚠ Oops Error!</h1>
+        <p class="lead"><%= error %>.</p>
+        <hr class="my-4" />
+        <p></p>
+        <a class="btn btn-primary btn-lg" href="/articles/add" role="button"
+          >add article 🚛
+        </a>
+        <a class="btn btn-primary btn-lg" href="/" role="button"
+          >back to home 🙉
+        </a>
+      </div>
+    </div>
+  </body>
+  <%- include('partials/script') %>
+</html>

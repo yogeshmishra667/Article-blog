@@ -12,16 +12,18 @@ router.post('/articles/add', async (req, res) => {
       abortEarly: false,
     });
     if (validationResult.error) {
-      return console.log('error aya re', validationResult.error);
+      return res.render('error', {
+        error: 'please 🥺 enter correct value something was not right',
+      });
     }
-    console.log('added successfully');
     const result = await article.save();
     if (result) {
       res.redirect('/');
-      // req.flash('success', 'Article added successfully');
     }
   } catch (error) {
-    console.log('something went to wrong', error);
+    return res.render('error', {
+      error: 'request denied check after some time',
+    });
   }
 });
 router.get('/articles/add', async (req, res) => {
@@ -38,7 +40,9 @@ router.get('/', async (req, res) => {
       articles: articles,
     });
   } catch (err) {
-    console.log(err);
+    return res.render('error', {
+      error: 'request denied check after some time',
+    });
   }
 });
 
@@ -73,14 +77,18 @@ router.post('/articles/edit/:id', async (req, res) => {
       abortEarly: false,
     });
     if (validationResult.error) {
-      return console.log('error aya re', validationResult.error);
+      return res.render('error', {
+        error: 'please enter correct value ',
+      });
     }
     if (result) {
       console.log('edited successfully');
       res.redirect('/');
     }
   } catch (err) {
-    console.log('something went to wrong :(');
+    return res.render('error', {
+      error: 'request denied  data not update',
+    });
   }
 });
 
@@ -89,7 +97,9 @@ router.get('/articles/delete/:id', async (req, res) => {
   if (article) {
     res.redirect('/');
   } else {
-    console.log('something went to wrong data can not delete');
+    return res.render('error', {
+      error: 'something went to wrong data can not delete',
+    });
   }
 });
 module.exports = router;
