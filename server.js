@@ -17,8 +17,6 @@ app.set('view engine', 'ejs');
 // parse application/x-www-form-urlencoded and application/json
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(articleRouter);
-app.use(userRouter);
 
 //Set Public Folder 🗄
 const publicPathDir = path.join(__dirname, './public');
@@ -30,10 +28,19 @@ app.use(
   session({
     secret: 'keyboard cat',
     cookie: { maxAge: 60000 },
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
   })
 );
+//for passport
+require('./config/passport')(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
+//routes
+app.use(articleRouter);
+app.use(userRouter);
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {

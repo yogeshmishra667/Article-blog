@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../models/user');
 const router = new express.Router();
+const passport = require('passport');
 const validateSchema = require('../validation/userValidate');
 
 /*<==================== YOGI.JS =====================>*/
@@ -8,6 +9,17 @@ const validateSchema = require('../validation/userValidate');
 router.get('/user/login', async (req, res) => {
   res.render('login');
 });
+//login user
+router.post(
+  '/user/login',
+  passport.authenticate('local', {
+    failureRedirect: '/user/login',
+  }),
+  function (req, res) {
+    return res.redirect('/');
+  }
+);
+
 //fetch user
 router.get('/register', async (req, res) => {
   res.render('register');
