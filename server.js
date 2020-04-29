@@ -1,9 +1,10 @@
 const express = require('express');
 const session = require('express-session');
-//const flash = require('connect-flash');
+const passport = require('passport');
 const path = require('path');
 require('./src/db/mongoose');
 const articleRouter = require('./src/routes/article');
+const userRouter = require('./src/routes/user');
 
 //init express🍏
 const app = express();
@@ -17,6 +18,7 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(articleRouter);
+app.use(userRouter);
 
 //Set Public Folder 🗄
 const publicPathDir = path.join(__dirname, './public');
