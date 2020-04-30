@@ -32,17 +32,23 @@ app.use(
     saveUninitialized: false,
   })
 );
-//for passport
+//for passportJs
 require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+
+//global variable for logout access in view ==> header.ejs
+app.get('*', function (req, res, next) {
+  res.locals.user = req.user || null;
+  next();
+});
 
 //routes
 app.use(articleRouter);
 app.use(userRouter);
 
+//for run express server
 const port = process.env.PORT || 3000;
-
 app.listen(port, () => {
-  console.log('yogi express server run on port', port);
+  console.log('express server run on port', port);
 });

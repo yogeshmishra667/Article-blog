@@ -8,19 +8,19 @@
     <%- include('partials/header') %>
     <div class="container">
       <h1 class="bodyHead"><%= article.title %></h1>
-      <h5 class="bodyAuthor">Written by <%= article.author %></h5>
+      <h5 class="bodyAuthor">Written by <%= author %></h5>
       <hr class="three" />
       <p class="bodyText"><%= article.body %></p>
       <hr />
+
+      <% if (user) { %>
       <a class="btn btn-warning" href="/articles/edit/<%= article._id %>"
         >Edit</a
       >
-
       <a class="btn btn-danger" href="/articles/delete/<%= article._id %>"
         >Delete</a
       >
-
-      <%- include('partials/footer') %>
+      <% } %> <%- include('partials/footer') %>
     </div>
   </body>
   <%- include('partials/script') %>

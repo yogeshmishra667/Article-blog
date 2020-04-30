@@ -20,17 +20,25 @@
             ><img class="images" src="/img/github.svg" alt="yogi" />
           </a>
         </li>
-
         <li id="home"><a href="/" class="header">HOME</a></li>
+
+        <% if (user) { %>
         <li id="about">
           <a href="/articles/add" class="header">ADD ARTICLE</a>
         </li>
+
+        <li id="register">
+          <a href="/user/logout" class="header">LOGOUT</a>
+        </li>
+        <%} else { %>
         <li id="register">
           <a href="/register" class="header">REGISTER</a>
         </li>
         <li id="login">
           <a href="/user/login" class="header">LOGIN</a>
         </li>
+        <% } %>
+
         <li id="me">
           <a href="https://linktr.ee/yogi.js" class="header">ABOUT ME</a>
         </li>
